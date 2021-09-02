@@ -51,7 +51,7 @@ Get Your Free Will Today And Leave More Than A Memory. Get Yours Today! Support 
 Get Your Free Will Today And Leave More Than A Memory. Get Yours Today! Support A Charity In Your Will And Change The Future. Request Your Offer Code Today! 503 UK Local Services. We Help 368K Children. Over 150 Years Old. Gift Aid Your Donation. UK-Based Charity. 85p in £1 Transform Lives. Types: One-Off Donations, Monthly Donations, Give A Charity Gift, Vulnerable Child Appeal.
 
 <a name="pre"></a>
-##  Prequiste
+##  Prerequisite
 * Redhat Machine with config---
 * Installed git.
 <a name="installD"></a>
