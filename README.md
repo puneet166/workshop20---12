@@ -90,13 +90,36 @@ example - its missing.
 <b> NOTE </b> - Save these information safe you'll need them to start the orchestrator.
 <a name="step1.4"></a>
 ### Start the orchestrator
-* abc1
-* abc2
+* You have to edit the ``` cosoms-phrase ```, ``` COSMOS-GRPC ex: http://localhost:9090 ```,``` ETH-RPC ex: http://"Your-eth-testchain-IP":8545 ```, ``` ethereum- key and gravity-contract-address ``` accordingly.
+* <b> NOTE - </b> Make sure this ethereum account have some ether.
+```
+    gbt orchestrator \
+         --cosmos-phrase="YOUR_ORCHESTRATOR_MNEMONIC" \
+         --cosmos-grpc="$cosmos-grpc" \
+         --ethereum-key="$ethereum-key" \
+         --ethereum-rpc="$ethereum-rpc" \
+         --fees="1stake" \
+         --gravity-contract-address="0x330122273ffF8A31E8B5EAF2099cbFF881c9eEB7"
+```
+<b> NOTE - Now your testchain is up and running with one validator, orchestrator and etherum node. </b>
 <a name="step1.5"></a>
 ### Important Notes
-* abc1
-* abc2
+* Your Gravity directory will be named as per your testchain name.
+* You can find all required information regarding validator, orchestrator and ethereum inside that folder.
+* Folder structure is ``` ~/"YOUR-TESTCHAIN-NAME"/gravity ```
+* You have to pass some basic information to the other validators so that they can join your testchain.
+    * Testchain Name.
+    * Your node-id. You can get using this command ``` gravity $GRAVITY_HOME_FLAG tendermint show-node-id ```.
+    * Your orchestrator ``` mnemonic ``` (We are passing this mnemonic so that the next validator can have some token from us to start testing,        this can be changed in future by using faucet to provide tokens).
+    * Your machine ``` public ip ``` on which testchain is hosted.
+    * Deployed ``` Gravity-contract address ```.
+    * If you have your own etherum testnet then ``` ETHGenesis.json ``` file and ``` machine-public-ip ``` which you have used to start        the ethereum testchain network.
+    * Ethereum-RPC address.
+    * Make sure following port open ``` 26657/tcp 26656/tcp 9090/tcp 1317/tcp 8545/tcp 30303/tcp 30303/udp ``` .
 
+
+
+    
 
 
 
