@@ -79,7 +79,7 @@ Get Your Free Will Today And Leave More Than A Memory. Get Yours Today! Support 
 <a name="step1.3"></a>
 ### Deploy the smart contract
 * first open the folder where contracts are placed ``` cd $HOME/gravity/solidity ``` $HOME is root directory in my cases.
-* Now deploy gravity contract and save it in contract file in our home directory. (something missing here.).
+* Now deploy gravity contract and save it in contract file in our home directory.
 * You have to change ``` COSMOS-RPC ``` ``` ex: http://localhost:26657 ``` , ``` ETH-RPC ``` ``` ex: http://"Your-eth-testchain-IP":8545 ``` endpoints and your ``` ETH_PRIVATE_KEY ``` accordingly.
 ``` npx ts-node \
   contract-deployer.ts \
@@ -89,7 +89,6 @@ Get Your Free Will Today And Leave More Than A Memory. Get Yours Today! Support 
    --contract=artifacts/contracts/Gravity.sol/Gravity.json \
    --test-mode=false > $HOME/contracts
 ```
-example - its missing.
 * You can check the contract information using ``` cat $HOME/contracts ``` . make sure run this command from your root/base directory.<br>
 <b> NOTE </b> - Save these information safe you'll need them to start the orchestrator.
 <a name="step1.4"></a>
