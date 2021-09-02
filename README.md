@@ -4,7 +4,7 @@
   * [About Orchestrator](#Orchestrator)
   * [About Eth](#Eth)
   * [About Smart contracts](#SC)
-### [ Prequiste ](#pre)
+### [prerequisite](#pre)
   * [Install all dependencies before deploy testchain](#installD)
 ### [Running with one validator, orchestrator and etherum node](#step1)
   * [To start your test chain with one validator](#step1.1)
