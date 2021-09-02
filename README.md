@@ -300,17 +300,25 @@ Now that we have some tokens on the Althea chain we can try sending them back to
 The denom of a bridged token will be
 
 ```
-gravity0xB1b8E75893d22BC2b05b0C976FF06b4569B4a687 ```
+gravity0xB1b8E75893d22BC2b05b0C976FF06b4569B4a687 
+
 ``` 
+
+
+```
 gbt client cosmos-to-eth \
          --cosmos-phrase "the phrase containing the Gravity bridged tokens (delegate keys mnemonic)" 
          --amount 5000000000000gravity0xB1b8E75893d22BC2b05b0C976FF06b4569B4a687 
          --fees 100footoken 
          --eth-destination "any eth address, try your delegate eth address"
 ```
-* You should see a message like this on your Orchestrator. The details of course will be different but it means that your Orchestrator has observed the event on Ethereum and sent the details into the Cosmos chain!
+
+* You should see a message like this on your Orchestrator. The details of course will be different but it means that your Orchestrator has observed the event on Ethereum and sent the details into the Cosmos chain! <br>
+
 ``` 
+
 [2021-08-17T07:28:09Z INFO  orchestrator::ethereum_event_watcher] Oracle observed deposit with sender 0xBf660843528035a5A4921534E156a27e64B231fE, destination cosmos1w049un5qc6c7466lxllf89mhpfnzkl3d2l9epm, amount 100000000000000000000, and event nonce 4
+
 ```
 
 
