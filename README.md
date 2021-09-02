@@ -1,8 +1,8 @@
 [ Overview.. ](#over)
 [ Prequiste ](#pre)
-1. [Step 1](#step1)
-2. [Step 2](#step2)
-3. [Step 3](#step3)
+1. [ Running with one validator, orchestrator and etherum node](#step1)
+2. [Join a gravity testchain with one validator and one orchestrator](#step2)
+3. [Testing deployed Network](#step3)
 
 
 
@@ -27,7 +27,7 @@ sometext
 sometext
 
 <a name="step3"></a>
-## 3.Testing deployed Network
+## 3. Testing deployed Network
 
 sometext
 
