@@ -117,31 +117,68 @@ example - its missing.
     * Ethereum-RPC address.
     * Make sure following port open ``` 26657/tcp 26656/tcp 9090/tcp 1317/tcp 8545/tcp 30303/tcp 30303/udp ``` .
 
-
-
-    
-
-
-
 <a name="step2"></a>
 ## Join a gravity testchain with one validator and one orchestrator
 
 <a name="step2.1"></a>
 ### Start a full Node
-* abc1
-* abc2
+* First, we have to join the testchain as a full node.
+* Run the following .sh file to start a full node.
+* To run this script you require ``` node-id ``` and ``` ip ``` of any validator of the chain to add it as a seed to connect to.<br>
+``` bash init.sh ```
+* Now we have a full node connected to testchain and syncing, but still this node is not a validator node. If you want to make it a vaidator wait for it to get completely synced with the chain then follow below steps.
+
 <a name="step2.2"></a>
 ### Make full node a validator node
-* abc1
-* abc2
+* To make this node a validator node we have to perform a create-validator transaction.
+
+* Run the ``` makeValidator.sh ``` shell script present at ``` /deploy/redhat-testchain-deployment/peer-validators ``` to make this node a validator.
+* To run this script you need a ``` mnemonic ``` of any orchestrator from the chain so that some tokens can be transffered to your validator. <br>
+``` bash makeValidator.sh ```
+* If everything goes well you will see the orchestrator key as output as well as the transactions. Then it will ask you to confirm the create-validator transaction and as soon as you confirm it a transaction log is generated and your full node will become a validator in chain.
+* To confirm whether you have joined the testchain as a validator or not go the ``` "GRAVITY-RPC"/validators ``` on any browser and you can find your validator-address in the validtor-set.
+
+
+
 <a name="step2.3"></a>
 ### Start orchestrator
-* abc1
-* abc2
+* Now we have to start an orchestrator.
+* first we have to generate some delegator keys <br>
+ ``` gbt init
+gbt keys register-orchestrator-address --validator-phrase "$YOUR_VALIDATOR_MNEMONIC" --fees=1footoken 
+```
+* It will generate a ``` cosmos address, mnemonic, an ethereum address and it's private key ```. Please save these information safe because we are going to use these in future as our delegator.
+* Now you have to fund some tokens to you delegator for that run the following command. <br>
+``` gravity --home YOUR_GRAVITY_DATA_DIR tx bank send $(gravity --home YOUR_GRAVITY_DATA_DIR keys show -a orch --keyring-backend test) $YOUR_DELEGATOR_COSMOS_ADDRESS 1000000stake --chain-id testchain --keyring-backend test -y
+
+gravity --home YOUR_GRAVITY_DATA_DIR tx bank send $(gravity --home YOUR_GRAVITY_DATA_DIR keys show -a orch --keyring-backend test) $YOUR_DELEGATOR_COSMOS_ADDRESS 1000000footoken --chain-id testchain --keyring-backend test -y
+```
+* Now you have to start a ethereum full node for the running ethereum testchain, if you want to go with rinkeby ``` geth --rinkeby --syncmode "light" --rpc --rpcport "8545" ``` or to start with your own etherum testchain follow this [Launch your own etherum network](#step4) then only move to next step.
+* You also have to fund some tokens to the generated Eth-account, you can use metamask for this purpose.
+* Now, run the following command to start orchestrator.
+* You have to edit the ``` cosoms-phrase, cosmos-grpc ex: http://localhost:9090, ethereum-rpc ex: http://"Your-eth-testchain-IP":8545, ethereum-key and gravity-contract-address ``` accordingly.
+```
+gbt orchestrator \
+        --cosmos-phrase="the-mnemonic-of-delegator-which-you-have-saved" \
+        --cosmos-grpc="$cosmos-grpc" \
+        --ethereum-key="private-key-of-the-delegator-which-you-have-saved" \
+        --ethereum-rpc="$ethereum-rpc" \
+        --fees="1stake" \
+        --gravity-contract-address="0x330122273ffF8A31E8B5EAF2099cbFF881c9eEB7"
+```
+
 <a name="step2.4"></a>
 ### Important Notes
-* abc1
-* abc2
+* Your Gravity directory will be named as per your testchain name.
+* You can find all required information regarding validator, orchestrator and ethereum inside that folder.
+* This is "YOUR_GRAVITY_DATA_DIR" ``` ~/"YOUR-TESTCHAIN-NAME"/gravity ```
+* GRAVITY-RPC : ``` http://"YOUR_MACHINE_PUBLIC_IP":26657 ```
+* GRVAITY_GRPC : ``` http://"YOUR_MACHINE_PUBLIC_IP":9090 ```
+* ETHEREUM_RPC : ``` http://"YOUR_MACHINE_PUBLIC_IP":8545 ```
+
+
+
+ 
 
 <a name="step4"></a>
 ## Launch your own etherum network
