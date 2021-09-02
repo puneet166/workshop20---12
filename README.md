@@ -19,6 +19,10 @@
   * [Important Notes](#step2.4)
 
 ### [Launch your own etherum network](#step4)
+  * [Start a ethereum testchain](#step4.1)
+  * [Add any node as a peer-node in this network](#step4.2)
+  * [Start a ethereum testchain full-node](#step4.3)
+  
 ### [Testing deployed Network](#step3)
 
 
@@ -116,6 +120,9 @@ example - its missing.
     * If you have your own etherum testnet then ``` ETHGenesis.json ``` file and ``` machine-public-ip ``` which you have used to start        the ethereum testchain network.
     * Ethereum-RPC address.
     * Make sure following port open ``` 26657/tcp 26656/tcp 9090/tcp 1317/tcp 8545/tcp 30303/tcp 30303/udp ``` .
+    * GRAVITY-RPC : ``` http://"YOUR_MACHINE_PUBLIC_IP":26657 ```
+    * GRVAITY_GRPC : ``` http://"YOUR_MACHINE_PUBLIC_IP":9090 ```
+    * ETHEREUM_RPC : ``` http://"YOUR_MACHINE_PUBLIC_IP":8545 ```
 
 <a name="step2"></a>
 ## Join a gravity testchain with one validator and one orchestrator
@@ -182,8 +189,81 @@ gbt orchestrator \
 
 <a name="step4"></a>
 ## Launch your own etherum network
+<a name="step4.1"></a>
+### Start a ethereum testchain
+* You'll need the ETHGenesis.json file to start the testchain.
+* Now run the following command to initialize the genesis block from where to start mining.
+``` geth --identity "GravityEthereum" \
+    --nodiscover \
+    --networkid 15 init ETHGenesis.json
+```
+* Now we'll start the chain.
+* Please add your ``` ETH-ADRESS ```(this address can also be found in your ETHGenesis.json file) at place of ethereum address.
+``` geth --identity "GravityEthereum" --nodiscover \
+                               --networkid 15 \
+                               --mine \
+                               --http \
+                               --http.port "8545" \
+                               --http.addr "0.0.0.0" \
+                               --http.corsdomain "*" \
+                               --http.vhosts "*" \
+                               --miner.threads=1 \
+                               --nousb \
+                               --verbosity=5 \
+                               --miner.etherbase="$ETHEREUM_ADDRESS"
+```
+* Now your ethereum testchain is up and running.
 
-sometext
+<a name="step4.2"></a>
+### Add any node as a peer-node in this network
+* this node will be our admin node so we'll add peers to this node.
+* attach the ``` geth.ipc ``` <br>
+```
+geth attach ~/.ethereum/geth.ipc
+```
+* Use the ``` enode ``` to add any node as peer-node, update ``` enode ``` and ``` ip ``` accordingly.<br>
+```
+admin.addPeer("enode://26f7b8...92e@[$ip]:30303?discport=0")
+```
+
+
+
+
+
+<a name="step4.3"></a>
+### Start a ethereum testchain full-node
+* Use the same ``` ETHGenesis.json ``` file which you have used to start the testchain.
+* Now run the following command to initialize the genesis block from where to start mining. <br>
+```
+geth --identity "GravityEthereum" --networkid 15 init ETHGenesis.json
+```
+* Start the testchain and save logs to a file. <br>
+```
+geth --rpc --rpcport "8545" --networkid 15 console 2>> myEth2.log
+```
+* Now we have to attach the geth.ipc. <br>
+```
+geth attach ~/.ethereum/geth.ipc
+```
+* Now view the enode info with following command.
+```
+admin.nodeInfo.enode
+```
+* Send this ``` enode ``` and your ``` MACHINE_PUBLIC_IP ``` to the master so that this node can be added as a peernode.
+* Check whether you are added as peer-node or not in the testchain by running the following command in ``` geth.ipc ```. <br>
+```
+admin.peers
+```
+
+
+
+
+
+
+
+
+
+
 
 <a name="step3"></a>
 ## Testing deployed Network
