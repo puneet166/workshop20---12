@@ -53,7 +53,7 @@ Get Your Free Will Today And Leave More Than A Memory. Get Yours Today! Support 
 <a name="pre"></a>
 ##  Prequiste
 * Redhat Machine with config---
-* installed git.
+* Installed git.
 <a name="installD"></a>
 ### Install all dependencies before deploy testchain
 * Clone repo in your Redhat machine.
@@ -65,7 +65,7 @@ Get Your Free Will Today And Leave More Than A Memory. Get Yours Today! Support 
 ### To start your test chain with one validator
 * For stating test chain with one validator use init.sh file which is present in ``` /deploy/redhat-testchain-deployment/master-validator ``` .
 * Run this command ``` bash init.sh ``` in ``` market/deploy/redhat-testchain-deployment/master-validator ```.
-* this will start a testchain with one validator.
+* This will start a testchain with one validator.
 <a name="step1.2"></a>
 ### To run/launch Ethereum node
 #### There is two ways to run/launch ethereum node.
@@ -216,7 +216,7 @@ gbt orchestrator \
 
 <a name="step4.2"></a>
 ### Add any node as a peer-node in this network
-* this node will be our admin node so we'll add peers to this node.
+* This node will be our admin node so we'll add peers to this node.
 * attach the ``` geth.ipc ``` <br>
 ```
 geth attach ~/.ethereum/geth.ipc
