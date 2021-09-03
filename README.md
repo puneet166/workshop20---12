@@ -74,7 +74,9 @@
    --contract=artifacts/contracts/Gravity.sol/Gravity.json \
    --test-mode=false > $HOME/contracts
 ``` 
-* You can check the contract information using ``` cat $HOME/contracts ``` . make sure run this command from your root/base directory.<br>
+<br /> 
+
+* You can check the contract information using ``` cat $HOME/contracts ``` . make sure run this command from your root/base directory. <br /> <br />
 <b> NOTE </b> - Save these information safe you'll need them to start the orchestrator. <br /> <br />
 <a name="step1.4"></a>
 ### Start the orchestrator <br /> <br />
@@ -89,6 +91,8 @@
          --fees="1stake" \
          --gravity-contract-address="0x330122273ffF8A31E8B5EAF2099cbFF881c9eEB7"
 ```
+<br />
+
 <b> NOTE - Now your testchain is up and running with one validator, orchestrator and etherum node. </b>  <br /> <br />
 <a name="step1.5"></a>
 ### Important Notes <br /> <br />
@@ -138,12 +142,16 @@
  ``` gbt init
 gbt keys register-orchestrator-address --validator-phrase "$YOUR_VALIDATOR_MNEMONIC" --fees=1footoken 
 ```
+<br />
+
 * It will generate a ``` cosmos address, mnemonic, an ethereum address and it's private key ```. Please save these information safe because we are going to use these in future as our delegator. <br /> <br />
 * Now you have to fund some tokens to you delegator for that run the following command. <br /> <br />
 ``` gravity --home YOUR_GRAVITY_DATA_DIR tx bank send $(gravity --home YOUR_GRAVITY_DATA_DIR keys show -a orch --keyring-backend test) $YOUR_DELEGATOR_COSMOS_ADDRESS 1000000stake --chain-id testchain --keyring-backend test -y
 
 gravity --home YOUR_GRAVITY_DATA_DIR tx bank send $(gravity --home YOUR_GRAVITY_DATA_DIR keys show -a orch --keyring-backend test) $YOUR_DELEGATOR_COSMOS_ADDRESS 1000000footoken --chain-id testchain --keyring-backend test -y
 ```
+<br />
+
 * Now you have to start a ethereum full node for the running ethereum testchain, if you want to go with rinkeby ``` geth --rinkeby --syncmode "light" --rpc --rpcport "8545" ``` or to start with your own etherum testchain follow this [Launch your own etherum network](#step4) then only move to next step. <br /> <br />
 * You also have to fund some tokens to the generated Eth-account, you can use metamask for this purpose. <br /> <br />
 * Now, run the following command to start orchestrator. <br /> <br />
@@ -157,6 +165,7 @@ gbt orchestrator \
         --fees="1stake" \
         --gravity-contract-address="0x330122273ffF8A31E8B5EAF2099cbFF881c9eEB7"
 ```
+<br />
 
 <a name="step2.4"></a>
 ### Important Notes <br /> <br />
@@ -181,6 +190,8 @@ gbt orchestrator \
     --nodiscover \
     --networkid 15 init ETHGenesis.json
 ```
+<br />
+
 * Now we'll start the chain. <br /> <br />
 * Please add your ``` ETH-ADRESS ```(this address can also be found in your ETHGenesis.json file) at place of ethereum address. <br /> <br/>
 ``` geth --identity "GravityEthereum" --nodiscover \
@@ -196,6 +207,8 @@ gbt orchestrator \
                                --verbosity=5 \
                                --miner.etherbase="$ETHEREUM_ADDRESS"
 ```
+<br />
+
 * Now your ethereum testchain is up and running. <br /> <br />
 
 <a name="step4.2"></a>
@@ -205,14 +218,13 @@ gbt orchestrator \
 ```
 geth attach ~/.ethereum/geth.ipc
 ```
+<br />
+
 * Use the ``` enode ``` to add any node as peer-node, update ``` enode ``` and ``` ip ``` accordingly. <br /> <br />
 ```
 admin.addPeer("enode://26f7b8...92e@[$ip]:30303?discport=0")
 ```
-
-
-
-
+<br />
 
 <a name="step4.3"></a>
 ### Start a ethereum testchain full-node <br /> <br />
@@ -221,33 +233,32 @@ admin.addPeer("enode://26f7b8...92e@[$ip]:30303?discport=0")
 ```
 geth --identity "GravityEthereum" --networkid 15 init ETHGenesis.json
 ```
+<br />
+
 * Start the testchain and save logs to a file. <br /> <br />
 ```
 geth --rpc --rpcport "8545" --networkid 15 console 2>> myEth2.log
 ```
+<br />
+
 * Now we have to attach the geth.ipc. <br /> <br />
 ```
 geth attach ~/.ethereum/geth.ipc
 ```
-* Now view the enode info with following command.
+<br />
+
+* Now view the enode info with following command. <br /> <br />
 ```
 admin.nodeInfo.enode
 ```
+<br />
+
 * Send this ``` enode ``` and your ``` MACHINE_PUBLIC_IP ``` to the master so that this node can be added as a peernode. <br /> <br />
 * Check whether you are added as peer-node or not in the testchain by running the following command in ``` geth.ipc ```. <br /> <br />
 ```
 admin.peers
 ```
-
-
-
-
-
-
-
-
-
-
+<br />
 
 <a name="step3"></a>
 ## Testing deployed Network or Gravity <br /> <br />
@@ -259,6 +270,8 @@ Now that we've made it this far it's time to actually play around with the bridg
 0x63c8eA8431ED11c0c5c4bD5BBb312bA76b07EF46 - ERC20B
 0x6c3A3437fe6966973901Db5429d7FD520f99F13a - ERC20C
 ```
+<br />
+
 * Note that the 'amount' field for this command is now in whole coins rather than wei like the previous testnets <br /> <br />
 
 ``` 
@@ -270,16 +283,22 @@ gbt client eth-to-cosmos \
         --destination "any Cosmos address, I suggest your delegate Cosmos address"
         --ethereum-rpc "http://"Your-eth-testchain-IP":8545"
 ```
+<br />
+
 * You should see a message like this on your Orchestrator. The details of course will be different but it means that your Orchestrator has observed the event on Ethereum and sent the details into the Cosmos chain! <br /> <br />
 ```
 [2021-08-17T06:13:37Z INFO  orchestrator::ethereum_event_watcher] Oracle observed batch with nonce 1, contract 0xB1b8E75893d22BC2b05b0C976FF06b4569B4a687, and event nonce 3
 ```
+<br />
+
 * Once the event has been observed we can check our balance on the Cosmos side. We will see some peggy tokens in our balance. We have a good bit of code in flight right now so the module renaming from 'Peggy' to 'Gravity' has been put on hold until we're feature complete. <br /> <br />
 
 ```
 althea query bank balances <any cosmos address>
 ```
-Now that we have some tokens on the Althea chain we can try sending them back to Ethereum. Remember to use the Cosmos phrase for the address you actually sent the tokens to. Alternately you can send Cosmos native tokens with this command.
+<br />
+
+Now that we have some tokens on the Althea chain we can try sending them back to Ethereum. Remember to use the Cosmos phrase for the address you actually sent the tokens to. Alternately you can send Cosmos native tokens with this command. <br /><br />
 
 The denom of a bridged token will be <br /> <br />
 
@@ -287,7 +306,7 @@ The denom of a bridged token will be <br /> <br />
 gravity0xB1b8E75893d22BC2b05b0C976FF06b4569B4a687 
 
 ``` 
-
+<br />
 
 ```
 gbt client cosmos-to-eth \
@@ -296,6 +315,7 @@ gbt client cosmos-to-eth \
          --fees 100footoken 
          --eth-destination "any eth address, try your delegate eth address"
 ```
+<br />
 
 * You should see a message like this on your Orchestrator. The details of course will be different but it means that your Orchestrator has observed the event on Ethereum and sent the details into the Cosmos chain! <br /> <br />
 
@@ -304,6 +324,8 @@ gbt client cosmos-to-eth \
 [2021-08-17T07:28:09Z INFO  orchestrator::ethereum_event_watcher] Oracle observed deposit with sender 0xBf660843528035a5A4921534E156a27e64B231fE, destination cosmos1w049un5qc6c7466lxllf89mhpfnzkl3d2l9epm, amount 100000000000000000000, and event nonce 4
 
 ```
+<br />
+
 <a name="over"></a>
 ##  Overview <br /> <br />
 <a name="fullnode"></a>
